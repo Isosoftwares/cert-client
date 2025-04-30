@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  font-family: Source Sans Pro, sans-serif;
+  letter-spacing: .25px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.active {
+  @apply text-[#eae8fd] bg-[#137DC5] rounded-md
+}
+
+.active:hover {
+  text-decoration: none;
+}
+
+/* Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.theme {
+  @apply bg-light dark:bg-dark2 text-dark dark:text-light;
+}
+.text {
+  @apply text-dark dark:text-light;
+}
+.primary-btn {
+  @apply text-light bg-primary px-4 py-2 rounded-md hover:bg-secondary disabled:cursor-not-allowed;
+}
+.secondary-btn {
+  @apply text-light bg-secondary px-4 py-1 rounded-md hover:bg-opacity-80 disabled:cursor-not-allowed;
+}
+.theme-border {
+  @apply border border-gray-300 dark:border-gray-800;
+}
+.input {
+  @apply bg-gray-50 text-gray-700 dark:text-gray-200 dark:bg-dark  focus:outline-none focus:border-primary focus:dark:border-primary border  border-gray-300 dark:border-gray-800  rounded-md py-2 px-4  w-full appearance-none disabled:cursor-not-allowed;
+}
+.file-input {
+  @apply rounded-md file:mr-4 file:py-[11px] file:px-4 file:border-0 shadow   bg-primary text-light;
+}
+
+/* Accordion  faqs */
+.accordion.active {
+  @apply dark:text-light;
+}
+
+.isOpen {
+  @apply max-h-screen p-4;
+}
+
+.tablediv{
+  @apply overflow-x-auto overflow-y-auto relative shadow-sm sm:rounded-md theme
+}
+
+.table {
+  @apply w-full table-auto  
+}
+.thead {
+  @apply  bg-secondary bg-opacity-30 border-b dark:border-b-gray-900
+}
+.trhead{
+  @apply bg-secondary/35 dark:bg-gray-800
+}
+.th{
+  @apply py-[5px] text-start px-2  
+}
+.tr{
+  @apply theme border-b dark:border-gray-900 hover:bg-gray-50 dark:hover:bg-gray-900 dark:odd:bg-dark odd:bg-[#fcfcfc]
+}
+.td{
+  @apply py-2 text-start px-2
+}
