@@ -8,7 +8,13 @@ const Footer = () => {
   };
   return (
     <footer className="bg-white border-t border-gray-200 py-8">
-      <img className="h-[60px] w-[300px] px-20 mb-4 " src={logo} alt="" />
+      <div className="xl:px-[200px] lg:px-[27px]  ">
+        <img
+          className="h-[50px] w-[150px]  mb-4 "
+          src={logo}
+          alt=""
+        />
+      </div>
       <div className="xl:px-[200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left column */}

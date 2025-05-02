@@ -13,6 +13,8 @@ import useScrollToTop from "./hooks/useScrollToTop";
 
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
+import { Helmet } from "react-helmet-async";
+import Profile from "./pages/Profile";
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -29,6 +31,9 @@ const App = () => {
 
   return (
     <div className="overflow-x-hidden">
+      <Helmet>
+        <meta name="robots" content="noindex,nofollow" />
+      </Helmet>
       <ToastContainer
         position="top-center"
         autoClose={5000}
@@ -48,6 +53,7 @@ const App = () => {
             {/* Call useScrollToTop here, inside the Router */}
             <Routes>
               <Route path="/:_id" element={<Home />} />
+              <Route path="/profile/:name/wallet" element={<Profile />} />
 
               <Route path="/*" element={<F404Page />} />
             </Routes>

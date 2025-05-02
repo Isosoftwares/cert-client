@@ -11,7 +11,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white  px-6 shadow relative">
+    <nav className="bg-white  px-6 shadow-lg relative">
       <div className=" lg:px-4 xl:px-[340px] mx-auto">
         <div className="flex justify-between items-center">
           {/* Logo and brand */}
@@ -26,7 +26,7 @@ const Navbar = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <span className="text-gray-900 text-lg font-medium py-5 hover:bg-gray-100 px-2 cursor-pointer">
+              <span className="text-gray-900 text-[16px] font-medium py-5 hover:bg-gray-100 px-2 cursor-pointer">
                 Suggested Credentials
               </span>
             </a>

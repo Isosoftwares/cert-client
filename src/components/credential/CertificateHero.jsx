@@ -5,7 +5,6 @@ import { Skeleton } from "@mantine/core";
 
 const CertificateHero = ({ client, loadingUser }) => {
   const [activeTab, setActiveTab] = useState("cert");
-console.log(client);
   return (
     <div className="bg-gray-100 py-8">
       {loadingUser ? (

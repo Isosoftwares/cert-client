@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../assets/naccc.png"; // Adjust the path as necessary
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { FaRegFilePdf } from "react-icons/fa";
 import { CiImageOn } from "react-icons/ci";
 import { MdHelpOutline } from "react-icons/md";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { Avatar, Divider } from "@mantine/core";
+import { Avatar, Divider, Menu, Modal } from "@mantine/core";
 import Graph from "../Graph";
+import HelpModal from "./HelpModal";
+import { useDisclosure } from "@mantine/hooks";
+import { Link } from "react-router-dom";
 
 const CredentialMain = ({ client, loadingUser }) => {
+  const [openedHelpModal, { open, close }] = useDisclosure(false);
+  const [opened, setOpened] = useState(false);
   function splitStringToArray(input) {
     return (
       input
@@ -49,6 +54,14 @@ const CredentialMain = ({ client, loadingUser }) => {
 
   return (
     <div className="space-y-8">
+      <Modal
+        opened={openedHelpModal}
+        onClose={close}
+        centered
+        withCloseButton={false}
+      >
+        <HelpModal closeModal={close} />
+      </Modal>
       {/* Credential Header Section */}
       <div className="pb-6">
         <div className="flex items-center mb-4">
@@ -88,14 +101,79 @@ const CredentialMain = ({ client, loadingUser }) => {
               <span className="px-2">BADGE</span>
             </button>
           </a>
-          <button className="flex items-center text-gray-700  hover:bg-gray-200 rounded-md px-3 py-1 text-sm">
+          <button
+            onClick={open}
+            className="flex items-center text-gray-700  hover:bg-gray-200 rounded-md px-3 py-1 text-sm"
+          >
             <MdHelpOutline className="px" />
             <span className="px-2">HELP</span>
           </button>
-          <button className="flex items-center text-gray-700  hover:bg-gray-200 rounded-md px-3 py-1 text-sm">
-            <span className="px-2">MORE</span>
-            <IoMdArrowDropdown className="px" />
-          </button>
+          <Menu shadow="md" width={250}>
+            <Menu.Target>
+              <button className="flex items-center text-gray-700  hover:bg-gray-200 rounded-md px-3 py-1 text-sm">
+                <span className="px-2">MORE</span>
+                <IoMdArrowDropdown className="px" />
+              </button>
+            </Menu.Target>
+
+            <Menu.Dropdown>
+              <Menu.Item>
+                {/* Contact Issuer Button */}
+                <a
+                  href="mailto:mcomau"
+                  className="flex items-center w-full py-2 px-3 mb-3 hover:bg-gray-100 rounded-md transition-colors"
+                >
+                  <span className="mr-3 text-gray-600">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </span>
+                  <span className="font-medium text-gray-900">
+                    Contact Issuer
+                  </span>
+                </a>
+              </Menu.Item>
+              <Menu.Item>
+                {/* More Information Button */}
+                <a
+                  target="_blank"
+                  href="https://help.accredible.com/s/?language=en_US"
+                  className="flex items-center w-full py-2 px-3 hover:bg-gray-100 rounded-md transition-colors"
+                >
+                  <span className="mr-3 text-gray-600">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </span>
+                  <span className="font-medium text-gray-900">
+                    More Information
+                  </span>
+                </a>
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
         </div>
         <div className="mt-4">
           <a
@@ -114,15 +192,20 @@ const CredentialMain = ({ client, loadingUser }) => {
           <Avatar
             name={`${client?.firstName} ${client?.lastName}`}
             color="initials"
-            allowedInitialsColors={["purple"]}
+            allowedInitialsColors={["white"]}
+            className="bg-[#4200FF]"
           />
           <div className="ml-3">
             <h2 className="text-lg font-medium text-gray-900">
               {`${client?.firstName} ${client?.middleName} ${client?.lastName}`}
             </h2>
-            <a href="#" className="text-primary hover:underline text-sm">
+            <Link
+              to={`/profile/${client?.firstName}${client?.lastName}/wallet`}
+              className="text-primary hover:underline text-sm"
+              state={{ client: client }}
+            >
               View All Credentials
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -156,9 +239,7 @@ const CredentialMain = ({ client, loadingUser }) => {
             </div>
             <div className="w-full">
               <h3 className="text-sm font-medium text-gray-500">EXPIRES ON</h3>
-              <p className="text-base text-gray-900">
-                {formatDate(client?.expiresOn)}
-              </p>
+              <p className="text-base text-gray-900">Does not expire</p>
             </div>
           </div>
 

@@ -187,7 +187,7 @@ const VerificationModal = ({ opened, onClose, credentialInfo, client }) => {
             <Text color="dimmed" size="sm">
               EXPIRES ON
             </Text>
-            <Text>{formatDate(client?.expiredOn)}</Text>
+            <Text>Does not expire</Text>
           </Stack>
         </Group>
 
